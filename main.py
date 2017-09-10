@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # pendulum datetime plugin ??
 # ajastamine APScheduler
 import sys
@@ -27,7 +26,6 @@ query {allHelins {
   bell
   hour
   minute
-  wDay
 }}
 
 ''')
@@ -52,7 +50,7 @@ def tick(lipp=meloodia):
 if __name__ == '__main__' and playing:
     scheduler = BackgroundScheduler()
     for x in range(helinate_arv):
-        scheduler.add_job(tick, 'cron', day_of_week='mon-sun', hour=parsed_ajad['data']['allHelins'][x]['hour'], minute=parsed_ajad['data']['allHelins'][x]['minute'], end_date='2018-05-30')
+        scheduler.add_job(tick, 'cron', day_of_week='mon-fri', hour=parsed_ajad['data']['allHelins'][x]['hour'], minute=parsed_ajad['data']['allHelins'][x]['minute'], end_date='2018-06-06')
     scheduler.start()
     scheduler.print_jobs()
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
