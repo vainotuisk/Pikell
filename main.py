@@ -8,15 +8,15 @@ from graphqlclient import GraphQLClient
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 from pygame import mixer
+
 client = GraphQLClient('https://api.graph.cool/simple/v1/cj7ebm8yt0m9s0114ngjezyec')
-now=time.localtime()
+now = time.localtime()
 print (now)
 mixer.init()
-meloodia = 1
 sisse = mixer.Sound("1.wav")
 valja = mixer.Sound("2.wav")
-sees= client.execute (
-  '''
+sees = client.execute(
+    '''
 query {allOnoffs {isSees}} 
 
 '''
@@ -30,27 +30,32 @@ query {allHelins {
 
 ''')
 print('Hetkel on kell: %s' % datetime.now())
-parsed_sees= json.loads(sees)
+parsed_sees = json.loads(sees)
 playing = parsed_sees['data']['allOnoffs'][0]['isSees']
-parsed_ajad= json.loads(ajad)
+parsed_ajad = json.loads(ajad)
 print(parsed_ajad['data']['allHelins'])
 helinate_arv = len(parsed_ajad['data']['allHelins'])
-print ('helinate arv on: '  + str(helinate_arv))
+print ('helinate arv on: ' + str(helinate_arv))
 print(parsed_ajad['data']['allHelins'][0])
-def tick(lipp=meloodia):
+
+
+def tick(x):
     print('Tick! The time is: %s' % datetime.now())
-    if lipp == 1:
+    print('Helin on ' + str(x % 2))
+    if x%2 == 1:
         sisse.play()
-        lipp = 2
+
     else:
         valja.play()
         time.sleep(4)
         valja.play()
-        lipp =1
+
+
 if __name__ == '__main__' and playing:
     scheduler = BackgroundScheduler()
     for x in range(helinate_arv):
-        scheduler.add_job(tick, 'cron', day_of_week='mon-fri', hour=parsed_ajad['data']['allHelins'][x]['hour'], minute=parsed_ajad['data']['allHelins'][x]['minute'], end_date='2018-06-06')
+        scheduler.add_job(tick, 'cron',[x], day_of_week='mon-fri', hour=parsed_ajad['data']['allHelins'][x]['hour'],
+                          minute=parsed_ajad['data']['allHelins'][x]['minute'], end_date='2018-06-06')
     scheduler.start()
     scheduler.print_jobs()
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
