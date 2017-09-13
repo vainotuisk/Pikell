@@ -40,15 +40,16 @@ print(parsed_ajad['data']['allHelins'][0])
 
 
 def tick(x):
-    print('Tick! The time is: %s' % datetime.now())
+    print('Tick! Kell on praegu: %s' % datetime.now())
     print('Helin on ' + str(x % 2))
-    if x%2 == 1:
-        sisse.play()
-
-    else:
-        valja.play()
-        time.sleep(4)
-        valja.play()
+# sisse ja väljahelinaga variant
+    # if x%2 == 1:
+    #     sisse.play()
+    #
+    # else:
+    #     valja.play()
+# ainult sissehelinaga
+    sisse.play()
 
 
 if __name__ == '__main__' and playing:
