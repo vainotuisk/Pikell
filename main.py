@@ -37,7 +37,6 @@ helinate_arv = len(parsed_ajad['data']['allHelins'])
 print ('helinate arv on: ' + str(helinate_arv))
 # print(parsed_ajad['data']['allHelins'][0])
 
-
 def tick(x):
     print('Tick! Kell on praegu: %s' % datetime.now())
     print('Helin on ' + str(x % 2))
