@@ -11,7 +11,6 @@ from pygame import mixer
 
 client = GraphQLClient('https://api.graph.cool/simple/v1/cj7ebm8yt0m9s0114ngjezyec')
 now = time.localtime()
-print (now)
 mixer.init()
 sisse = mixer.Sound("1.wav")
 valja = mixer.Sound("2.wav")
@@ -33,16 +32,16 @@ print('Hetkel on kell: %s' % datetime.now())
 parsed_sees = json.loads(sees)
 playing = parsed_sees['data']['allOnoffs'][0]['isSees']
 parsed_ajad = json.loads(ajad)
-print(parsed_ajad['data']['allHelins'])
+# print(parsed_ajad['data']['allHelins'])
 helinate_arv = len(parsed_ajad['data']['allHelins'])
 print ('helinate arv on: ' + str(helinate_arv))
-print(parsed_ajad['data']['allHelins'][0])
+# print(parsed_ajad['data']['allHelins'][0])
 
 
 def tick(x):
     print('Tick! Kell on praegu: %s' % datetime.now())
     print('Helin on ' + str(x % 2))
-# sisse ja väljahelinaga variant
+# sisse ja v2ljahelinaga variant
     # if x%2 == 1:
     #     sisse.play()
     #
